@@ -11,7 +11,7 @@ class FishShop
     public function buyFish(array $fishTypes, PaymentProcess $payment, float $money)
     {
         $payment->PaymentProcess($money);
-        echo ($fishTypes["Price"] <= $money) ? "The purchase was completed successfully." : "There is not enough money to buy fish.!";
+        echo ($fishTypes["Price"] <= $money) ? "The purchase of {$fishTypes["Name"]} was completed successfully." : "There is not enough money to buy fish.!";
     }
 }
 
@@ -70,4 +70,4 @@ $fishTypes = new FishTypes([
 ]);
 
 $fishShop = new FishShop();
-$fishShop->buyFish($fishTypes->types[1], new Visa("123456789"), 50);
+$fishShop->buyFish($fishTypes->types[3], new Visa("123456789"), 50);
