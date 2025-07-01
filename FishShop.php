@@ -65,4 +65,4 @@ $fishTypes = new FishTypes([
 ]);
 
 $fishShop = new FishShop();
-$fishShop->buyFish($fishTypes->types[1], new PayPal("123456789"), 50);
+$fishShop->buyFish($fishTypes->types[1], new Visa("123456789"), 50);
