@@ -60,7 +60,7 @@ $fishTypes = new FishTypes([
     [
         "Name" => "Bore",
         "Imported From" => "Egypt",
-        "Price" => "40"
+        "Price" => "50"
     ]
 ]);
 
