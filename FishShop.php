@@ -10,8 +10,8 @@ class FishShop
 {
     public function buyFish(array $fishTypes, PaymentProcess $payment, float $money)
     {
-        $payment->PaymentProcess($money);
         echo ($fishTypes["Price"] <= $money) ? "The purchase of {$fishTypes["Name"]} was completed successfully." : "There is not enough money to buy fish.!";
+        $payment->PaymentProcess($money);
     }
 }
 
