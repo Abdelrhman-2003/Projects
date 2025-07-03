@@ -26,9 +26,10 @@ class Amazon
 {
 
     private $x = 1;
-    private $totalPrice = 0 ;
+    private $totalPrice = 0;
 
     public function __construct(public array $categories) {}
+
     public function showCategories()
     {
         foreach ($this->categories as $categories) {
@@ -42,14 +43,15 @@ class Amazon
         $category->show();
     }
 
-    public function addToCart(array $items) {
-        foreach ($items as $item){
-            echo ($this->x === 1 ) ? "Added " : false ;
+    public function addToCart(array $items)
+    {
+        foreach ($items as $item) {
+            echo ($this->x === 1) ? "\nAdded " : false;
             $this->x++;
-            echo $item["name"] . ", " ; 
+            echo $item["name"] . ", ";
             $this->totalPrice += $item['price'];
         }
-        echo "To Cart. \nThe Total Price = {$this->totalPrice}" ;
+        echo "To Cart. \nThe Total Price = {$this->totalPrice}$";
     }
 
     public function buyItems() {}
@@ -67,56 +69,32 @@ $amazon = new Amazon([
 $clothesCategory = new ClothesCategory(
     [
         "Men" => [
-            [
-                "name" => "Jacket",
-                "price" => 120
-            ],
-            [
-                "name" => "T-Shirt",
-                "price" => 100
-            ],
-
-            [
-                "name" => "Trousers",
-                "price" => 150
-            ],
-            [
-                "name" => "Shoes",
-                "price" => 80
-            ]
+            ["name" => "Jacket", "price" => 120],
+            ["name" => "T-Shirt", "price" => 100],
+            ["name" => "Trousers", "price" => 150],
+            ["name" => "Shoes", "price" => 80]
         ],
 
         "Women" => [
-            [
-                "name" => "Dress",
-                "price" => 2000
-            ],
-            [
-                "name" => "Coat",
-                "price" => 1400
-            ],
-
-            [
-                "name" => "Trousers",
-                "price" => 850
-            ],
-            [
-                "name" => "Shoes",
-                "price" => 1000
-            ]
+            ["name" => "Dress", "price" => 2000],
+            ["name" => "Coat", "price" => 1400],
+            ["name" => "Trousers", "price" => 850],
+            ["name" => "Shoes", "price" => 1000]
         ]
     ]
 );
 
 
-// Show Categories items in amazon
-// $amazon->showCategories();
-// select  one Category to show items 
-// $amazon->selectCategory($clothesCategory);
-//add the item to cart
+//show the All categories in Amazon Shop
+$amazon->showCategories();
+
+//select one category to show inside items
+$amazon->selectCategory($clothesCategory);
+
+// add the items to cart to buy them
 $amazon->addToCart([
-    $clothesCategory->items["Men"][0],
-    $clothesCategory->items["Men"][1],
-    $clothesCategory->items["Women"][3]
-]); 
-//pay the money
+    $clothesCategory->items['Men'][0],
+    $clothesCategory->items['Men'][2],
+    $clothesCategory->items['Women'][0],
+    $clothesCategory->items['Women'][1]
+]);
