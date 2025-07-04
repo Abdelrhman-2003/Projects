@@ -63,7 +63,7 @@ class Amazon
     }
 }
 
-interface LoginValidate
+interface Login
 {
     public function __construct(User $user);
 }
@@ -78,7 +78,7 @@ class User
     public function __construct(public string $username, public string $password) {}
 }
 
-class Visa implements LoginValidate, PaymentProcess
+class Visa implements Login, PaymentProcess
 {
     public function __construct(User $user) {}
     public function PaymentProcess()
@@ -87,7 +87,7 @@ class Visa implements LoginValidate, PaymentProcess
     }
 }
 
-class Paypal implements LoginValidate, PaymentProcess
+class Paypal implements Login, PaymentProcess
 {
     public function __construct(User $user) {}
     public function PaymentProcess()
@@ -96,7 +96,7 @@ class Paypal implements LoginValidate, PaymentProcess
     }
 }
 
-class MasterCard implements LoginValidate, PaymentProcess
+class MasterCard implements Login, PaymentProcess
 {
     public function __construct(User $user) {}
     public function PaymentProcess()
