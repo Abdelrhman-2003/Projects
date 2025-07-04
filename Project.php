@@ -52,9 +52,57 @@ class Amazon
             $this->totalPrice += $item['price'];
         }
         echo "To Cart. \nThe Total Price = {$this->totalPrice}$";
+        echo "\n ------------------------------------- \n";
     }
 
-    public function buyItems() {}
+    public function buyItems(PaymentProcess $paymentProcess,  string $price)
+    {
+        echo ($price == $this->totalPrice) ?
+            "The purchase was completed successfully\n{$paymentProcess->PaymentProcess()}." :
+            "Not enough money to buy products\n";
+    }
+}
+
+interface LoginValidate
+{
+    public function __construct(User $user);
+}
+
+interface PaymentProcess
+{
+    public function PaymentProcess();
+}
+
+class User
+{
+    public function __construct(public string $username, public string $password) {}
+}
+
+class Visa implements LoginValidate, PaymentProcess
+{
+    public function __construct(User $user) {}
+    public function PaymentProcess()
+    {
+        return "Thanks To Use visa Card";
+    }
+}
+
+class Paypal implements LoginValidate, PaymentProcess
+{
+    public function __construct(User $user) {}
+    public function PaymentProcess()
+    {
+        return "Thanks To Use Paypal";
+    }
+}
+
+class MasterCard implements LoginValidate, PaymentProcess
+{
+    public function __construct(User $user) {}
+    public function PaymentProcess()
+    {
+        return "Thanks To Use Mastercard";
+    }
 }
 
 //create object contain the Categories Data
@@ -85,16 +133,10 @@ $clothesCategory = new ClothesCategory(
 );
 
 
-//show the All categories in Amazon Shop
 $amazon->showCategories();
 
-//select one category to show inside items
 $amazon->selectCategory($clothesCategory);
 
-// add the items to cart to buy them
-$amazon->addToCart([
-    $clothesCategory->items['Men'][0],
-    $clothesCategory->items['Men'][2],
-    $clothesCategory->items['Women'][0],
-    $clothesCategory->items['Women'][1]
-]);
+$amazon->addToCart([$clothesCategory->items["Men"][0], $clothesCategory->items["Women"][3]]);
+
+$amazon->buyItems(new Paypal(new User("Abdelrhman Khaled", "123456789")), 1120);
